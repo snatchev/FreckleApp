@@ -1,0 +1,2 @@
+class PageController < UIPageViewController
+end
