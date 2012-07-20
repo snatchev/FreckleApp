@@ -38,5 +38,5 @@ PODS:
 DEPENDENCIES:
   - DCIntrospect
   - RestKit/Network
-  - RestKit/ObjectMapping
+  - RestKit/ObjectMapping (from `https://github.com/appRenaissance/RestKit.git', commit `cc78e0a8d6bb59e1983b57b47590f5e4f381cd7c')
   - RestKit/UI
