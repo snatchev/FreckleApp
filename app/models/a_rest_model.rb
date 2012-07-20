@@ -1,7 +1,7 @@
-class RestModel
+module RestModel
   RKObjectManager.managerWithBaseURLString("https://appren.letsfreckle.com/api")
 
-  def self.mapping(opts = {}, &block)
+  def mapping(opts = {}, &block)
     objectMapping = RKObjectMapping.mappingForClass(self)
     map = block.call
     map.each do |key, value|
