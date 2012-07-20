@@ -11,5 +11,8 @@ Motion::Project::App.setup do |app|
 
   app.pods do
     pod 'DCIntrospect'
+    pod 'RestKit/Network'
+    pod 'RestKit/UI'
+    pod 'RestKit/ObjectMapping'
   end
 end

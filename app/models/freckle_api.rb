@@ -13,6 +13,17 @@ class FreckleApi < NSObject
     end
   end
 
+  def self.getEntries(&blocK)
+    request(:get, "entries.json") do |response|
+      if response.ok?
+        json = BubbleWrap::JSON.parse(response.body.to_str)
+        block.call(json)
+      else
+        App.alert(response.body)
+      end
+    end
+  end
+
   def self.request(*args, &block)
     verb = args.shift
     url = URL + args.shift
