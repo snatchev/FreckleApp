@@ -7,7 +7,7 @@ class EntriesController < UITableViewController
   end
 
   def viewDidLoad
-    User.all(self)
+    Entry.all(self)
   end
 
   def tableView(tableView, numberOfRowsInSection:section)
@@ -15,12 +15,13 @@ class EntriesController < UITableViewController
   end
 
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
+    entry = entries[indexPath.row]
     cell = tableView.dequeueReusableCellWithIdentifier "Entry"
-    cell = nil
     if cell.nil?
       cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier:"Entry")
     end
-    cell.textLabel.text = entries[indexPath.row].firstName
+    cell.textLabel.text = entry.entryDescription
+    cell.detailTextLabel.text = entry.createdAt
     cell
   end
 

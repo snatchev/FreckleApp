@@ -1,4 +1,5 @@
-class User < RestModel
+class User
+  extend RestModel
   mapping(rootKey:"user", resourcePath:"/users.json") do
     {
       userId: "id",
@@ -12,7 +13,7 @@ class User < RestModel
     }
   end
 
-  def self.all(delegate = nil)
+  def self.all(delegate)
     RKObjectManager.sharedManager.loadObjectsAtResourcePath("/users.json", delegate:delegate)
   end
 end
