@@ -1,0 +1,4 @@
+build/*
+vendor/Pods
+.dat*
+.repl_history

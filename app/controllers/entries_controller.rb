@@ -7,10 +7,7 @@ class EntriesController < UITableViewController
   end
 
   def viewDidLoad
-    FreckleApi.getProjects do |json|
-      @entries = json
-      self.tableView.reloadData
-    end
+    User.all(self)
   end
 
   def tableView(tableView, numberOfRowsInSection:section)
@@ -23,7 +20,16 @@ class EntriesController < UITableViewController
     if cell.nil?
       cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier:"Entry")
     end
-    cell.textLabel.text = entries[indexPath.row]["project"]["name"]
+    cell.textLabel.text = entries[indexPath.row].firstName
     cell
+  end
+
+  def objectLoader(loader, didLoadObjects:objects)
+    @entries = objects
+    self.tableView.reloadData
+  end
+
+  def objectLoader(loader, didFailWithError:error)
+    puts error
   end
 end

@@ -11,5 +11,8 @@ Motion::Project::App.setup do |app|
 
   app.pods do
     pod 'DCIntrospect'
+    pod 'RestKit/Network'
+    pod 'RestKit/UI'
+    pod 'RestKit/ObjectMapping', git: 'https://github.com/appRenaissance/RestKit.git', commit: 'cc78e0a8d6bb59e1983b57b47590f5e4f381cd7c'
   end
 end
