@@ -30,6 +30,6 @@ class Entry
       #],
   end
   def self.all(delegate)
-    RKObjectManager.sharedManager.loadObjectsAtResourcePath("/entries.json?search[people]=18763", delegate:delegate)
+    RKObjectManager.sharedManager.loadObjectsAtResourcePath("/entries.json", delegate:delegate)
   end
 end
