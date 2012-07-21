@@ -1,5 +1,5 @@
 module RestModel
-  RKObjectManager.managerWithBaseURLString("https://appren.letsfreckle.com/api")
+  RKObjectManager.managerWithBaseURLString("https://apitest.letsfreckle.com/api")
 
   def mapping(opts = {}, &block)
     objectMapping = RKObjectMapping.mappingForClass(self)
@@ -10,6 +10,6 @@ module RestModel
     end
     RKObjectManager.sharedManager.mappingProvider.setObjectMapping(objectMapping, forResourcePathPattern: opts[:resourcePath])
     RKObjectManager.sharedManager.mappingProvider.registerObjectMapping(objectMapping, withRootKeyPath:opts[:rootKey])
-    RKObjectManager.sharedManager.client.setValue("1opmx4g9v944psyjfq35985jcs94au1", forHTTPHeaderField:"X-FreckleToken")
+    RKObjectManager.sharedManager.client.setValue("lx3gi6pxdjtjn57afp8c2bv1me7g89j", forHTTPHeaderField:"X-FreckleToken")
   end
 end
