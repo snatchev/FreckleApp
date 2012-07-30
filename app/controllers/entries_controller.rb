@@ -7,7 +7,12 @@ class EntriesController < UITableViewController
   end
 
   def viewDidLoad
-    Entry.all(self)
+    Entry.all do |entries, loader, error|
+      if error.nil?
+        self.entries = entries
+        self.tableView.reloadData
+      end
+    end
   end
 
   def tableView(tableView, numberOfRowsInSection:section)
@@ -20,17 +25,8 @@ class EntriesController < UITableViewController
     if cell.nil?
       cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier:"Entry")
     end
-    cell.textLabel.text = entry.entryDescription
-    cell.detailTextLabel.text = entry.createdAt
+    cell.textLabel.text = entry.entry_description
+    cell.detailTextLabel.text = entry.created_at
     cell
-  end
-
-  def objectLoader(loader, didLoadObjects:objects)
-    @entries = objects
-    self.tableView.reloadData
-  end
-
-  def objectLoader(loader, didFailWithError:error)
-    puts error
   end
 end

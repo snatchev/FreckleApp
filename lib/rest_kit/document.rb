@@ -3,7 +3,6 @@ module RestKit
     def self.included(base)
       base.extend ClassMethods
       base.fields = []
-      base.manager = RKObjectManager.managerWithBaseURLString("https://appren.letsfreckle.com/api")
       base.mapping = RKObjectMapping.mappingForClass(base)
     end
 
@@ -12,13 +11,14 @@ module RestKit
       attr_accessor :manager
       attr_accessor :mapping
 
-      def restkit(&block)
+      def restkit(opts = {}, &block)
+        #set the restkit opts
+        root_key(opts[:root_kit])
+        resource_path(opts[:resource_path])
+
         block.call
         RKObjectManager.sharedManager.mappingProvider.setObjectMapping(mapping, forResourcePathPattern:resource_path)
         RKObjectManager.sharedManager.mappingProvider.registerObjectMapping(mapping, withRootKeyPath:root_key)
-
-        #move this outta here
-        RKObjectManager.sharedManager.client.setValue("ij5lwdth1vvbdv1govzfk5umxs5lmoe", forHTTPHeaderField:"X-FreckleToken")
       end
 
       def root_key(value = nil)
@@ -35,7 +35,7 @@ module RestKit
         #property is on the js object
         property = property.to_s
         #attribute is on the rb object
-        attribute = opts[:as] || property.camelize
+        attribute = opts[:as] || property
         attr_accessor(attribute)
         mapping.mapKeyPath(property, toAttribute:attribute)
       end
