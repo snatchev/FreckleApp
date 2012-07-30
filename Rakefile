@@ -2,12 +2,19 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project'
 require 'bubble-wrap'
+require 'bubble-wrap/reactor'
+
 require 'motion-cocoapods'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'FreckleApp'
-  app.files.unshift(*Dir['vendor/teacup/lib/**/*.rb'])
+  app.files += Dir['./vendor/teacup/lib/**/*.rb']
+  app.files += Dir['./lib/**/*.rb']
+  app.files += Dir['./app/**/*.rb']
+
+  #this sticks the app files at the end (-_-)
+  app.files = app.files.reverse.uniq.reverse.freeze
 
   app.pods do
     pod 'DCIntrospect'
