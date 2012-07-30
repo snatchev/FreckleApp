@@ -5,7 +5,7 @@ class User
     root_key "user"
     resource_path "/users.json"
 
-    field :id, as: "userId"
+    field :id, as: "user_id"
     field :email
     field :first_name
     field :last_name

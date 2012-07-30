@@ -1,35 +1,36 @@
 class Entry
-  extend RestModel
-  mapping(rootKey:"entry", resourcePath:"/entries.json") do
-    {
-      createdAt: "created_at",
-      billable: "billable",
-      minutes: "minutes",
-      updatedAt: "updated_at",
-      recentlyUpdatedAt: "recently_updated_at",
-      projectId: "project_id",
-      importId: "import_id",
-      url: "url",
-      timeTo: "time_to",
-      entryId: "id",
-      date: "date",
-      userId: "user_id",
-      formattedDescription: "formatted_description",
-      descriptionText: "description_text",
-      timeFrom: "time_from",
-      entryDescription: "description",
-      invoicedAt: "invoiced_at",
-      projectInvoiceId: "project_invoice_id"
-    }
-      #"tags": [
-        #{
-          #"name": "bulk import",
-          #"billable": true,
-          #"id": 23035
-        #}
-      #],
+  include RestKit::Document
+  include RestKit::Delegate
+  restkit do
+    root_key "entry"
+    resource_path "/entries.json"
+
+    field :created_at
+    field :billable
+    field :minutes
+    field :updated_at
+    field :recently_updated_at
+    field :project_id
+    field :import_id
+    field :url
+    field :id, as: 'entry_id'
+    field :time_to
+    field :user_id
+    field :formatted_description
+    field :description_text
+    field :time_from
+    field :description, as: 'entry_description'
+    field :invoiced_at
+    field :project_invoice_id
+
+    #embeds_many :tags
   end
-  def self.all(delegate)
-    RKObjectManager.sharedManager.loadObjectsAtResourcePath("/entries.json", delegate:delegate)
-  end
+      ##"tags": [
+        ##{
+          ##"name": "bulk import",
+          ##"billable": true,
+          ##"id": 23035
+        ##}
+      ##],
+  #end
 end
