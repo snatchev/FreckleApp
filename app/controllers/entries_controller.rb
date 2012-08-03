@@ -1,13 +1,24 @@
 class EntriesController < UITableViewController
 
   attr_accessor :entries
+  attr_accessor :week_number
+
 
   def entries
     @entries || []
   end
 
-  def viewDidLoad
-    Entry.in_week(2) do |entries, loader, error|
+  def week_number
+    @week_number || 5
+  end
+
+  def week_number=(value)
+    @week_number = value
+    reload_data
+  end
+
+  def reload_data
+    Entry.in_week(week_number) do |entries, loader, error|
       if error.nil?
         self.entries = entries
         self.tableView.reloadData
@@ -28,5 +39,9 @@ class EntriesController < UITableViewController
     cell.textLabel.text = entry.entry_description
     cell.detailTextLabel.text = entry.created_at
     cell
+  end
+
+  def shouldAutorotateToInterfaceOrientation(orientation)
+    autorotateToOrientation(orientation)
   end
 end

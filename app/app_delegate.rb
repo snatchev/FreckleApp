@@ -3,7 +3,8 @@ class AppDelegate
 
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-    @window.rootViewController = EntriesController.alloc.init
+    #@window.rootViewController = EntriesController.alloc.init
+    @window.rootViewController = PagesController.alloc.init
     @window.makeKeyAndVisible
     #RKLogInitialize()
     #lcl_configure_by_name("RestKit/Network*", RKLogLevelTrace)
