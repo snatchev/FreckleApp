@@ -10,7 +10,7 @@ class PagesController < UIViewController
     @toolbar = UIToolbar.alloc.init
     @toolbar_items = [UIBarButtonItem.alloc.initWithTitle("One", style:UIBarButtonItemStyleBordered, target:self, action:"test")]
     @title_button = UIBarButtonItem.alloc.initWithTitle("Week 5", style:UIBarButtonItemStylePlain, target:self, action:"handleTitleTap")
-    @toolbar_items << @title_button
+    @toolbar_items << ToolbarHelper.flexible << @title_button << ToolbarHelper.flexible
     @toolbar.setItems(@toolbar_items, animated:false)
     @toolbar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
 
