@@ -33,4 +33,13 @@ class Entry
         ##}
       ##],
   #end
+
+  def self.in_week(week_number, &block)
+    start_date, end_date = DateHelper.date_strings_from_week_number(week_number)
+    query = {
+      search: {from: start_date, to: end_date}
+    }
+
+    self.load_objects(query, &block)
+  end
 end

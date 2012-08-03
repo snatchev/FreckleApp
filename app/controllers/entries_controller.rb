@@ -7,7 +7,7 @@ class EntriesController < UITableViewController
   end
 
   def viewDidLoad
-    Entry.all do |entries, loader, error|
+    Entry.in_week(2) do |entries, loader, error|
       if error.nil?
         self.entries = entries
         self.tableView.reloadData

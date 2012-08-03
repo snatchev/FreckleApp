@@ -22,11 +22,16 @@ module RestKit
     end
 
     module ClassMethods
-      def all(&block)
+      def load_objects(query = {}, &block)
         #HACK: delegates are weak references, we are putting this in an instance variable so it doesnt get GC'ed
         #probably bad practice.
         @delegate = DefferedDelegate.new(&block)
-        RKObjectManager.sharedManager.loadObjectsAtResourcePath(self.resource_path, delegate:@delegate)
+        #RKObjectManager.sharedManager.loadObjectsAtResourcePath(self.resource_path, usingBlock: lambda do |loader|
+          #loader.delegate = @delegate
+          #loader.params = query
+          #end)
+        resource_path = self.resource_path.stringByAppendingQueryParameters(query)
+        RKObjectManager.sharedManager.loadObjectsAtResourcePath(resource_path, delegate:@delegate)
       end
     end
   end
